@@ -17,28 +17,30 @@ docker run -d --name mi_nginx_container -p 8080:80 -v ./html:/usr/share/nginx/ht
 
 ### ¿Qué sucede al ingresar al servidor de nginx?
 Al ingresar al servidor de nginx se muestra la siguiente imagen
-![Volúmenes](imagenes/w.PNG)
-
+![Volúmenes](imagenes/A.JPG)
+error 403 Forbidden
 
 ### ¿Qué pasa con el archivo index.html del contenedor?
-
-
+Se abre
+![Volúmenes](imagenes/B.JPG)
 
 
 ### Ir a https://html5up.net/ y descargar un template gratuito, descomprirlo dentro de nginx/html
 ### ¿Qué sucede al ingresar al servidor de nginx?
-
-
-
+Se muestra la pantalla del template
 
 ### Eliminar el contenedor
-# COMPLETAR CON EL COMANDO
+```
+ docker rm -f mi_nginx_container
+```
 
 ### ¿Qué sucede al crear nuevamente el mismo contenedor con volumen de tipo host a los directorios definidos anteriormente?
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+
+Cuando creas nuevamente el mismo contenedor Docker con el mismo volumen de tipo host a los mismos directorios definidos anteriormente, básicamente estás recreando el mismo entorno de servidor web Nginx con el mismo contenido en la carpeta html.
 
 ### ¿Qué hace el comando pwd?
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+te devolverá /home/usuario/documentos, mostrando la ruta completa del directorio en el que te encuentras. Este comando es útil para verificar rápidamente en qué ubicación estás trabajando en la estructura de directorios del sistema de archivos.
+
 Si quieres incluir el comando pwd dentro de un comando de Docker, lo puedes hacer de diferentes maneras dependiendo del shell que estés utilizando.
 
 
