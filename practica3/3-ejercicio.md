@@ -2,19 +2,19 @@
 ![Imagen](imagenes/esquema-ejercicio3.PNG)
 
 ### Crear red net-wp
-
+```
 docker network create net-wp
 
-
+```
 lista todas las redes disponibles en Docker:
-
+```
 docker network ls
-
+```
 
 Por ejemplo, para conectar un contenedor a la red net-wp, puedes utilizar el siguiente comando al crear el contenedor:
-
+```
 docker run -d --name mi_contenedor --network net-wp imagen_contenedor
-
+```
 
 ### Para que persista la información es necesario conocer en dónde mysql almacena la información.
 # COMPLETAR LA SIGUIENTE ORACIÓN. REVISAR LA DOCUMENTACIÓN DE LA IMAGEN EN https://hub.docker.com/)
