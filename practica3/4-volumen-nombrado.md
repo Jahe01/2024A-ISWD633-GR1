@@ -8,7 +8,9 @@ docker volume create <nombre volumen>
 ```
 
 ### Crear el volumen nombrado: vol-postgres
-# COMPLETAR CON EL COMANDO
+```
+docker volume create vol-postgres
+```
 
 ## MOUNTPOINT
 Un mountpoint se refiere al lugar en el sistema de archivos donde un dispositivo de almacenamiento se une (o monta) al sistema de archivos. Es el punto donde los archivos y directorios almacenados en ese dispositivo de almacenamiento son accesibles para el sistema operativo y las aplicaciones.
@@ -18,7 +20,14 @@ Por ejemplo, en Windows las unidades de almacenamiento (como `C:`, `D:`, etc.) a
 Cuando creas un volumen nombrado, Docker asigna un punto de montaje específico en el sistema de archivos del host para ese volumen.
 
 ### ¿Cuál es el Mountpoint de vol-postgres?
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+Para determinar el punto de montaje (Mountpoint) de un volumen en Docker, se utiliza el siguiente comando:
+```
+docker volume inspect nombre_volumen
+```
+Esto te proporcionará información detallada sobre el volumen, incluido su punto de montaje en el sistema de archivos del host. En el caso del volumen nombrado vol-postgres, se ejecuta:
+```
+docker volume inspect vol-postgres
+```
 
 ### Estructura del Punto de Montaje:
 - /var/lib/docker/volumes/: Es la ubicación base donde Docker almacena todos los volúmenes en el sistema de archivos del host.
@@ -35,7 +44,17 @@ docker run -d --name <nombre contenedor> -v <nombre volumen>:<ruta contenedor> <
 ```
 
 ### Crear la red net-drupal de tipo bridge
-# COMPLETAR CON EL COMANDO
+Para crear un contenedor vinculado a un volumen nombrado
+```
+docker run -d --name mi_contenedor -v vol-postgres:/datos nombre_imagen
+```
+Esto creará un contenedor llamado mi_contenedor vinculado al volumen nombrado vol-postgres, montando el volumen en la ruta /datos dentro del contenedor, utilizando la imagen especificada.
+
+Para crear la red net-drupal de tipo bridge
+```
+docker network create net-drupal
+```
+
 
 ### Crear un servidor postgres vinculado a la red net-drupal, completar la ruta del contenedor
 docker run -d --name server-postgres -e POSTGRES_DB=db_drupal -e POSTGRES_PASSWORD=12345 -e POSTGRES_USER=user_drupal -v vol-postgres:<ruta contenedor> --network net-drupal postgres
