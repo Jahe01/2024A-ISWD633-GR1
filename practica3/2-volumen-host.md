@@ -8,15 +8,16 @@ docker run -d --name <nombre contenedor> -v <ruta carpeta host>:<ruta carpeta co
 ### Crear un volumen tipo host con la imagen nginx:alpine, para la ruta carpeta host: directorio en donde se encuentra la carpeta html en tu computador y para la ruta carpeta contenedor: /usr/share/nginx/html esta ruta se obtiene al revisar la se obtiene desde la documentación
 ![Volúmenes](imagenes/volumen-host.PNG)
 
+Se debe de crear con puertos 
 
 ```
-docker run -d --name mi_nginx_container -v ~/html:/usr/share/nginx/html nginx:alpine
+docker run -d --name mi_nginx_container -p 8080:80 -v ./html:/usr/share/nginx/html nginx:alpine
 ```
 
 
 ### ¿Qué sucede al ingresar al servidor de nginx?
-Al ingresar l servidor de nginx
-
+Al ingresar al servidor de nginx se muestra la siguiente imagen
+![Volúmenes](imagenes/w.PNG)
 
 
 ### ¿Qué pasa con el archivo index.html del contenedor?
