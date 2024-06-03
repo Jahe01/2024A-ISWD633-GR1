@@ -1,0 +1,2 @@
+# COMPLETAR  
+La práctica realizada no solo reforzó mis conocimientos sobre Docker, sino que también me proporcionó habilidades prácticas que son cruciales para la gestión y despliegue de aplicaciones en entornos contenedorizados. Estos aprendizajes son beneficiosos para mi formación profesional, ya que Docker es una herramienta ampliamente utilizada en la industria para el desarrollo y la operación de software. 
