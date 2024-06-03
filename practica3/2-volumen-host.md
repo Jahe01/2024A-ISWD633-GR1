@@ -17,12 +17,12 @@ docker run -d --name mi_nginx_container -p 8080:80 -v ./html:/usr/share/nginx/ht
 
 ### ¿Qué sucede al ingresar al servidor de nginx?
 Al ingresar al servidor de nginx se muestra la siguiente imagen
-![Volúmenes](imagenes/A.JPG)
+![Imagen](imagenes/A.JPG)
 error 403 Forbidden
 
 ### ¿Qué pasa con el archivo index.html del contenedor?
 Se abre
-![Volúmenes](imagenes/B.JPG)
+![Imagen](imagenes/B.JPG)
 
 
 ### Ir a https://html5up.net/ y descargar un template gratuito, descomprirlo dentro de nginx/html
