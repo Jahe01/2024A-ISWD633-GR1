@@ -115,6 +115,7 @@ docker run -d --name server-drupal \
   --network net-drupal \
   drupal
 ```
+![Imagen](imagenes/aaa.PNG)
 Instalación de Drupal
 Para ingresar al servidor Drupal y seguir el paso a paso de la instalación, abre tu navegador y dirígete a http://localhost:9700. Sigue las instrucciones en pantalla para completar la instalación.
 
