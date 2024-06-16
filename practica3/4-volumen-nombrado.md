@@ -67,17 +67,76 @@ docker run -d --name client-postgres --publish published=9500,target=80 -e PGADM
 ### Usar el cliente postgres para conectarse al servidor postgres, para la conexión usar el nombre del servidor en lugar de la dirección IP.
 
 ### Crear los volúmenes necesarios para drupal, esto se puede encontrar en la documentación
-### COMPLETAR CON LOS COMANDOS
+Comandos Docker para Configurar el Servidor y Cliente PostgreSQL, y el Servidor Drupal
+Crear el servidor PostgreSQL vinculado a la red net-drupal:
+```
+docker run -d --name server-postgres \
+  -e POSTGRES_DB=db_drupal \
+  -e POSTGRES_PASSWORD=12345 \
+  -e POSTGRES_USER=user_drupal \
+  -v vol-postgres:/var/lib/postgresql/data \
+  --network net-drupal \
+  postgres
+```
 
-### Crear el contenedor server-drupal vinculado a la red, usar la imagen drupal, y vincularlo a los volúmenes nombrados
-docker run -d --name server-drupal --publish published=9700,target=80 -v <nombre volumen>:<ruta contenedor> -v <nombre volumen>:<ruta contenedor> -v <nombre volumen>:<ruta contenedor> -v <nombre volumen>:<ruta contenedor> --network net-drupal drupal
+Crear el cliente PostgreSQL vinculado a la red net-drupal con la imagen dpage/pgadmin4:
+```
+docker run -d --name client-postgres \
+  --publish published=9500,target=80 \
+  -e PGADMIN_DEFAULT_PASSWORD=54321 \
+  -e PGADMIN_DEFAULT_EMAIL=tu_email@example.com \
+  --network net-drupal \
+  dpage/pgadmin4
+```
+Usar el cliente PostgreSQL para conectarse al servidor PostgreSQL:
+Para conectarte al servidor PostgreSQL, abre pgAdmin4 en tu navegador (http://localhost:9500), inicia sesión con las credenciales proporcionadas y agrega un nuevo servidor con la siguiente configuración:
 
-### Ingrese al server-drupal y siga el paso a paso para la instalación.
-# COMPLETAR CON UNA CAPTURA DE PANTALLA DEL PASO 4
+Nombre del servidor: server-postgres
+Host: server-postgres
+Puerto: 5432
+Usuario: user_drupal
+Contraseña: 12345
+Crear los volúmenes necesarios para Drupal (según la documentación oficial de Drupal):
+```
+docker volume create drupal-data
+docker volume create drupal-modules
+docker volume create drupal-profiles
+docker volume create drupal-sites
 
-_La instalación puede tomar varios minutos, mientras espera realice un diagrama de los contenedores que ha creado en este apartado._
+```
+Crear el contenedor server-drupal vinculado a la red net-drupal:
+```
+docker run -d --name server-drupal \
+  --publish published=9700,target=80 \
+  -v drupal-data:/var/www/html/data \
+  -v drupal-modules:/var/www/html/modules \
+  -v drupal-profiles:/var/www/html/profiles \
+  -v drupal-sites:/var/www/html/sites \
+  --network net-drupal \
+  drupal
+```
+Instalación de Drupal
+Para ingresar al servidor Drupal y seguir el paso a paso de la instalación, abre tu navegador y dirígete a http://localhost:9700. Sigue las instrucciones en pantalla para completar la instalación.
 
-# COMPLETAR CON EL DIAGRAMA SOLICITADO
+
+```
++------------------+             +--------------------+
+| server-postgres  | <---------> | server-drupal      |
+|                  |             |                    |
+| Network: net-drupal            |                    |
+| Volume: vol-postgres           |                    |
++------------------+             +--------------------+
+                                      |
+                                      |
+                                      v
+                                +--------------------+
+                                | client-postgres    |
+                                | (pgAdmin4)         |
+                                | Network: net-drupal|
+                                | Published port: 9500|
+                                +--------------------+
+
+```
 
 ### Eliminar un volumen específico
 ```
