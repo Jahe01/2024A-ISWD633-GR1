@@ -25,9 +25,9 @@ docker run -d --name wordpress --network net-wp -e WORDPRESS_DB_HOST=mysql:3306 
 
 
 ### Para que persista la información es necesario conocer en dónde mysql almacena la información.
-# COMPLETAR LA SIGUIENTE ORACIÓN. REVISAR LA DOCUMENTACIÓN DE LA IMAGEN EN https://hub.docker.com/)
-En el esquema del ejercicio la carpeta contenedor (a) es (COMPLETAR CON LA RUTA)
+En el esquema del ejercicio la carpeta contenedor (b) es /var/www/html. Ruta carpeta host: .../ejercicio3/www.
 Ruta carpeta host: .../ejercicio3/db
+
 
 ### ¿Qué contiene la carpeta db del host?
 La carpeta esta vacia
@@ -35,25 +35,48 @@ La carpeta esta vacia
 
 
 ### Crear un contenedor con la imagen mysql:8  en la red net-wp, configurar las variables de entorno: MYSQL_ROOT_PASSWORD, MYSQL_DATABASE, MYSQL_USER y MYSQL_PASSWORD
+Comando para Crear el Contenedor con la Imagen de WordPress
+```
+docker run -d --name server-wordpress \
+  -e WORDPRESS_DB_HOST=server-postgres \
+  -e WORDPRESS_DB_USER=user_drupal \
+  -e WORDPRESS_DB_PASSWORD=12345 \
+  -e WORDPRESS_DB_NAME=db_drupal \
+  -v .../ejercicio3/www:/var/www/html \
+  --network net-wp \
+  wordpress
 
-
+```
 ### ¿Qué observa en la carpeta db que se encontraba inicialmente vacía?
 
 Se encuentrar los archivos de mysql
 
 ### Para que persista la información es necesario conocer en dónde wordpress almacena la información.
 # COMPLETAR LA SIGUIENTE ORACIÓN. REVISAR LA DOCUMENTACIÓN DE LA IMAGEN EN https://hub.docker.com/)
-En el esquema del ejercicio la carpeta contenedor (b) es (COMPLETAR CON LA RUTA)
+En el esquema del ejercicio la carpeta contenedor (b) es /var/www/html. Ruta carpeta host: .../ejercicio3/www.
 Ruta carpeta host: .../ejercicio3/www
 
-### Crear un contenedor con la imagen wordpress en la red net-wp, configurar las variables de entorno WORDPRESS_DB_HOST, WORDPRESS_DB_USER, WORDPRESS_DB_PASSWORD y WORDPRESS_DB_NAME (los valores de estas variables corresponden a los del contenedor creado previamente)
-# COMPLETAR CON EL COMANDO
+Personalización y Persistencia
+Personalizar la Apariencia y Agregar una Entrada
 
-### Personalizar la apariencia de wordpress y agregar una entrada
+Ingresa a tu instalación de WordPress a través del navegador (usualmente en http://localhost o en el puerto que hayas configurado) y personaliza la apariencia. Agrega una entrada desde el panel de administración de WordPress.
 
-### Eliminar el contenedor y crearlo nuevamente, ¿qué ha sucedido?
+Eliminar el Contenedor y Crearlo Nuevamente
+```
+docker rm -f server-wordpress
 
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+docker run -d --name server-wordpress \
+  -e WORDPRESS_DB_HOST=server-postgres \
+  -e WORDPRESS_DB_USER=user_drupal \
+  -e WORDPRESS_DB_PASSWORD=12345 \
+  -e WORDPRESS_DB_NAME=db_drupal \
+  -v .../ejercicio3/www:/var/www/html \
+  --network net-wp \
+  wordpress
+
+```
+
+¿Qué ha sucedido? Al eliminar el contenedor y crearlo nuevamente, si has configurado correctamente el volumen persistente (montaje de la carpeta /var/www/html a la ruta en el host .../ejercicio3/www), la personalización de la apariencia y las entradas que agregaste deberían persistir. Esto es porque los datos se almacenan en el volumen que mapeaste a la carpeta del host, permitiendo que los cambios realizados se mantengan aunque el contenedor sea eliminado y recreado.
 
 
 
