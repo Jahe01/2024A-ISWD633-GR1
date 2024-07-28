@@ -1,3 +1,3 @@
 # COMPLETAR  
-Antes no sabía sobre los volúmenes, ahora me encuentro en la capacidad de realizarlos y crearlos gracias a esta práctica. Bediciones.
+Antes no sabía sobre los volúmenes, ahora me encuentro en la capacidad de realizarlos y crearlos gracias a esta práctica, los volúmenes en Docker es que permiten la persistencia de datos más allá del ciclo de vida de los contenedores. Esto significa que los datos almacenados en volúmenes no se pierden cuando un contenedor se detiene o se elimina, a menos que se elimine el volumen de manera explícita. Además, los volúmenes pueden ser compartidos entre múltiples contenedores, lo que facilita la colaboración y el intercambio de datos entre diferentes servicios. También ofrecen un mejor rendimiento comparado con el uso de sistemas de archivos montados del host y simplifican el proceso de hacer copias de seguridad y restaurar datos. Bediciones.
 
